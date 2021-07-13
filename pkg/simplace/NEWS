@@ -1,3 +1,6 @@
+Version 4.3.5
+* Fix for rebuilding vignette
+
 Version 4.3.4
 * Restored previous vignette mechanism as the locally created has not been included
 
