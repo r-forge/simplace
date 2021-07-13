@@ -1,3 +1,6 @@
+Version 4.3.4
+* Restored previous vignette mechanism as the locally created has not been included
+
 Version 4.3.3
 * Use vignette created locally to include outputs/graphs (corrected .Rbuildignore)
 
