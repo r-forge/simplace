@@ -10,7 +10,7 @@ getUnitsOfResult(result)
 \item{result}{handle to the data container returned by \code{\link{getResult}}}
 }
 \value{
-character vector with the units
+named character vector with the units
 }
 \description{
 Get the units of each variable (i.e. data column) in a 
