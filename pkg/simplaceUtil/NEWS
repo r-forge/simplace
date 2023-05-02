@@ -1,0 +1,104 @@
+Version 0.6.2
+* small bugfix when creating solution outputs
+
+Version 0.6.1
+* improved vignette
+
+Version 0.6.0
+* first draft of a vignette
+
+Version 0.5.2
+* bugfix in shiny app when no standard installation dir found
+
+Version 0.5.1
+* function to add timing elements to a solution
+
+Version 0.5.0
+* function to create XML and Java code stubs from variables table
+
+Version 0.4.4
+* preserve DOCTYPE of sol.xml
+* units and description are optional for user variables
+
+Version 0.4.3
+* variable and input values can be arrays
+* bugfix in description modifications
+
+Version 0.4.2
+* modification are recorded in the description tag
+* added function to swap sim components
+
+Version 0.4.1
+* added functions to set input values of a solution
+
+Version 0.4.0
+* added functions to modify a solution
+
+Version 0.3.5
+* avoid errors during plots when switching output
+
+Version 0.3.4
+* include CSV outputs for display / plot (if files exist)
+
+Version 0.3.3
+* plot multiple simulation ids
+* check if layered values exist before layer plot
+
+Version 0.3.2
+* updated documentation
+
+Version 0.3.1
+* get correct neighbourhood for multiple components
+* option to take the union or intersection of neighbourhoods
+
+Version 0.3.0
+* multiple select of components for graphs
+* highlight selected components
+* fix filtering of links table
+
+Version 0.2.2
+* improvements and corrections to plot outputs from csv
+
+Version 0.2.1
+* use ggplot2 for plots
+* refactored code
+
+Version 0.2.0
+* add interfaces to component and link dataframes
+* optionally display components in graph
+* plot multiple variabel into one diagram
+* add help panel to shiny app
+
+Version 0.1.2
+* select date range for plots
+* plot array values as filled contour
+
+Version 0.1.1
+* use also array values from memory output
+
+Version 0.1.0
+* show plots of memory results
+* changed status to beta version
+
+Version 0.0.6
+* enhanced display of solution graphs (linking from and to panel)
+
+Version 0.0.5
+* display memory output also when running project
+* smaller bugfixes
+
+Version 0.0.4
+* create & run simulation when memory output exists
+* display memory output
+* filter graph by components
+* sortable, paged tables
+
+Version 0.0.3
+* set simplace folders and run simulations
+* display component and link table
+
+Version 0.0.2
+* add experimental shiny app
+
+Version 0.0.1
+* alpha version, proof of concept
