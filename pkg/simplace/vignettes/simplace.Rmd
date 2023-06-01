@@ -1,10 +1,15 @@
 ---
 title: "Interface to use Simplace from R"
 author: "Gunther Krauss"
-date: "`r format(Sys.Date(),format='%B %d, %Y')`"
+date: "`r Sys.setlocale('LC_ALL','English.utf8');format(Sys.Date(),format='%B %d, %Y')`"
 output: 
   rmarkdown::pdf_document: 
     number_sections: yes
+  rmarkdown::html_vignette:
+    number_sections: yes
+    fig-width: 7
+    fig-height: 6
+  
 
 vignette: >
   %\VignetteIndexEntry{Simplace}
@@ -13,16 +18,23 @@ vignette: >
 
 ---
 
+```{r setup, include=FALSE}
+withSimplace <- FALSE
+try({
+  withSimplace <- !is.na(simplace::findFirstSimplaceInstallation())
+})
+```
+
 # Introduction
-This package provides methods to interact with the modelling framework <span style="font-variant:small-caps;">Simplace
-</span>^[**S**<span style="font-variant:small-caps;">cientific</span> 
+This package provides methods to interact with the modelling framework <span style="font-variant:small-caps;">Simplace</span>^[
+**S**<span style="font-variant:small-caps;">cientific</span> 
 **I**<span style="font-variant:small-caps;">mpact assessment and</span> 
 **M**<span style="font-variant:small-caps;">odelling</span>
 **PL**<span style="font-variant:small-caps;">atform for</span> 
 **A**<span style="font-variant:small-caps;">dvanced</span> 
 **C**<span style="font-variant:small-caps;">rop and</span> 
 **E**<span style="font-variant:small-caps;">cosystem management</span>. 
-See [www.simplace.net](http://www.simplace.net/) for more information on Simplace]. Simplace is written in Java (and some parts in Scala) so one can access it from `R` via `rJava`. The purpose of this package is to simplify the interaction between R and Simplace, by providing functions to:
+See [www.simplace.net](https://www.simplace.net/) for more information on Simplace]. Simplace is written in Java (and some parts in Scala) so one can access it from `R` via `rJava`. The purpose of this package is to simplify the interaction between R and Simplace, by providing functions to:
 
 - initialize and configure Simplace
 - load a simulation (solution and project)
@@ -32,7 +44,7 @@ See [www.simplace.net](http://www.simplace.net/) for more information on Simplac
 
 
 # Installing the Simplace Framework
-For installing <span style="font-variant:small-caps;">Simplace</span>, please consult the webpage [www.simplace.net](http://www.simplace.net/).
+For installing <span style="font-variant:small-caps;">Simplace</span>, please consult the webpage [www.simplace.net](https://www.simplace.net/).
 A brief guide to install <span style="font-variant:small-caps;">Simplace</span>:
 
 - If you don't have installed Java, please install an appropriate version of the (JRE or JDK) from [openjdk.java.net](https://openjdk.java.net/) or [adoptium.net](https://adoptium.net) (recommended).
@@ -40,10 +52,8 @@ A brief guide to install <span style="font-variant:small-caps;">Simplace</span>:
 - Install the `simplace` package in R:  
 
 ```{r eval=FALSE}
-install.packages('simplace', 
-   repos=c('https://r-forge.r-project.org','https://cran.r-project.org'))
+install.packages('simplace')
 ```
-
 
 
 # Basic Usage
@@ -69,7 +79,7 @@ The usage of <span style="font-variant:small-caps;">Simplace</span> in R follows
 
 ## Run the simulation
 
-```{r running, results='hide', eval=FALSE}
+```{r running, results='hide', eval=withSimplace}
 library(simplace)
 SimplaceInstallationDir <- findFirstSimplaceInstallation()
 
@@ -97,11 +107,11 @@ After specifying the directories and the solution, the framework is initialized 
 
 ## Get the result and plot it
 
-```{r plotting, fig.height=5, fig.width=6, eval=FALSE}
-resf <- resultToDataframe(result)
- 
+```{r plotting, fig.height=5, fig.width=6, eval=withSimplace}
+simdata <- resultToDataframe(result)
+
 dates <- 300:730
-weights <- resf[dates,
+weights <- simdata[dates,
     c("TOP_LINE_Roots","TOP_LINE_Leaves","TOP_LINE_Stems","TOP_LINE_StorageOrgans")]
 matplot(dates,weights,type="l",xlab="Days",ylab="Weight [g/m2]",main="Simulated Biomass")
 legend(300,800,legend=c("Roots","Leaves","Stems","Storage Organs"),lty=1:4,col=1:4)
@@ -116,7 +126,7 @@ The result is converted to a dataframe. Interesting variables are extracted and 
 ## Get arrays and plot them as contour plot
 
 
-```{r contourplot, fig.height=5, fig.width=6, eval=FALSE}
+```{r contourplot, fig.height=5, fig.width=6, eval=withSimplace}
 resultlistexp <- resultToList(result,expand=TRUE)
 water <- resultlistexp$BOTTOM_ARRAY_VolumetricWaterContent
 wmat <- do.call(rbind,water)
