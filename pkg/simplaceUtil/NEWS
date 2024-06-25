@@ -1,3 +1,16 @@
+Version 0.6.8
+* get output filenames
+* automatic facets for layered data plots
+* methods to fetch SimComponent list and SimVariabes documentation from Website
+
+Version 0.6.7
+* fixed creation of solution stubs from data
+* updated documentation
+
+Version 0.6.6
+* renamed functions for creating solution stubs from data
+* improved variable creation for code stubs
+
 Version 0.6.5
 * Create resource and interface stubs from CSV or XML file structure
 

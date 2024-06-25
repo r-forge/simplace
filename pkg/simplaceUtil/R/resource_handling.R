@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples
-#' stubs <- createCsvResourceStubs(
+#' stubs <- createResourceStubsFromCsv(
 #'   filename = system.file("input","weather.csv", package="simplaceUtil"),
 #'   id = "weather",
 #'   sep =",",
@@ -22,7 +22,7 @@
 #' cat(stubs$interface)
 #' cat(stubs$resource)
 #'
-#' stubs <- createCsvResourceStubs(
+#' stubs <- createResourceStubsFromCsv(
 #'   filename = system.file("input","soil.csv", package="simplaceUtil"),
 #'   id = "soil",
 #'   sep =";",
@@ -32,7 +32,7 @@
 #' cat(stubs$resource)
 
 #'
-createCsvResourceStubs <- function(filename, id,
+createResourceStubsFromCsv <- function(filename, id,
                                             sep=",",
                                             keyvals = NULL,
                                             arraycolumns = NULL,
@@ -62,7 +62,7 @@ createCsvResourceStubs <- function(filename, id,
   if(!is.null(rule) && frequence %in% c("BOOLEAN","COMPLEX")) {
     rl <- paste0(' rule="',rule,'"')
   }
-  res <- paste0('<resource id="',id,'" interface="',id,'_file" frequence="',frequence,'"',rl,'>')
+  res <- paste0('<resource id="',id,'" interface="',id,'_file" frequence="',frequence,'"',rl,'>',"\n",'  <header>')
   for(i in 1:ncol(data)) {
     dt <- "DOUBLE"
     if(is.character(data[1,i])) {
@@ -84,10 +84,10 @@ createCsvResourceStubs <- function(filename, id,
     if(nm[i] %in% keyvals) {
       key <- paste0(' key="',kn[keyvals==nm[i]],'"')
     }
-    ri <- paste0("\n",'  <res id="',nm[i],'"',key,' datatype="',dt,'", unit=""/>')
+    ri <- paste0("\n",'    <res id="',nm[i],'"',key,' datatype="',dt,'" unit=""/>')
     res <- paste0(res, ri)
   }
-  res <- paste0(res,"\n",'</resource>')
+  res <- paste0(res,"\n",'  </header>',"\n",'</resource>')
   list(interface = intf, resource = res)
 }
 
@@ -105,13 +105,13 @@ createCsvResourceStubs <- function(filename, id,
 #' @export
 #'
 #' @examples
-#' stubs <- createXmlResourceStubs(
+#' stubs <- createResourceStubsFromXml(
 #'   filename = system.file("input","crop.xml",package="simplaceUtil"),
 #'   id="soil",
 #'   keyvals = c("vSoilType"=1)
 #' )
 #' cat(stubs$resource)
-createXmlResourceStubs <- function(filename, id,
+createResourceStubsFromXml <- function(filename, id,
                                             keyvals = NULL,
                                             frequence = "DAILY",
                                             rule = NULL,
@@ -132,7 +132,7 @@ createXmlResourceStubs <- function(filename, id,
   if(!is.null(rule) && frequence %in% c("BOOLEAN","COMPLEX")) {
     rl <- paste0(' rule="',rule,'"')
   }
-  res <- paste0('<resource id="',id,'" interface="',id,'_file" frequence="',frequence,'"',rl,'>')
+  res <- paste0('<resource id="',id,'" interface="',id,'_file" frequence="',frequence,'"',rl,'>',"\n",'  <header>')
 
 
   set <- xml2::xml_children(xmlnode)[[1]]
@@ -180,9 +180,9 @@ createXmlResourceStubs <- function(filename, id,
       key <- paste0(' key="',kn[keyvals==kid],'"')
     }
 
-    ri <- paste0("\n",'  <res id="',id,'"',key,' datatype="',dt,'", unit="',unit,'"/>')
+    ri <- paste0("\n",'    <res id="',id,'"',key,' datatype="',dt,'" unit="',unit,'"/>')
     res <- paste0(res, ri)
   }
-  res <- paste0(res,"\n",'</resource>')
+  res <- paste0(res,"\n",'  </header>',"\n",'</resource>')
   list(interface = intf, resource = res)
 }

@@ -398,7 +398,7 @@ Data can be given in CSV or XML format. The structure of the data has to be
 compatible with Simplace.
 
 ```{r}
-stubs <- createCsvResourceStubs(
+stubs <- createResourceStubsFromCsv(
   filename = system.file("input","weather.csv", package="simplaceUtil"),
   id = "weather",
   sep =",",
@@ -479,4 +479,13 @@ rawOutput(stubs$ResourceParametersXML)
 ```
 
 
+# Accessing SimComponent documentation
+
+With `fetchSimComponentlistFromWebsite()` one can get the java class names of the SimComponents from Simplace's website.
+
+With the class name one can then fetch the SimVariables as a dataframe
+
+```{r}
+fetchSimVariablesFromWebsite('net.simplace.sim.components.evapotran.fao56.ReferenceETHargreaves')[,1:8]
+```
 

@@ -4,14 +4,14 @@
 \alias{replaceVariablesWithValues}
 \title{Replaces variables with content}
 \usage{
-replaceVariablesWithValues(text, variables, additional)
+replaceVariablesWithValues(text, variables, additional = NULL)
 }
 \arguments{
 \item{text}{text to replace}
 
 \item{variables}{variables dataframe}
 
-\item{additional}{additional variables as named vector c("var1"="value1", ...)}
+\item{additional}{additional variables as named vector c("var1"="value1", ...), useful for directory placeholder}
 }
 \description{
 Replaces variables with content
