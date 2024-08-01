@@ -33,8 +33,8 @@ includeGraphic <- function(gr,name) {
   
     type <- ifelse(knitr::is_latex_output(),'pdf','png')
     fn <- knitr::fig_path(type,number=as.integer(runif(1,0,10000)))
-    dir.create(dirname(fn),recursive = TRUE, showWarnings = FALSE)
-    DiagrammeR::export_graph(gr, fn, width = 2000)
+    try(dir.create(dirname(fn),recursive = TRUE, showWarnings = FALSE))
+    try(DiagrammeR::export_graph(gr, fn, width = 2000))
     if(!file.exists(fn))
     {
       fn <- system.file("img",paste0(name,'.png'),package="simplaceUtil")
@@ -188,7 +188,7 @@ graph <- solutionToGraph(solfile)
 DiagrammeR::render_graph(graph)
 ```
 ```{r echo=FALSE, out.width="100%"}
-includeGraphic(graph,"graph")
+try(includeGraphic(graph,"graph"))
 ```
 
 We can restrict the graph to specific component types and the neighborhood of
@@ -202,7 +202,7 @@ subgraph <- getNeighborhood(graph, c("SlimWater","SlimRoots"),
 DiagrammeR::render_graph(subgraph)
 ```
 ```{r echo=FALSE, out.width="100%"}
-includeGraphic(subgraph,"subgraph")
+try(includeGraphic(subgraph,"subgraph"))
 ```
 
 
