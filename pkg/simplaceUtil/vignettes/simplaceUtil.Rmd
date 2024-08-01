@@ -3,16 +3,16 @@ title: "simplaceUtil"
 author: "Gunther Krauss"
 date: "`r Sys.setlocale('LC_ALL','English.utf8');format(Sys.Date(),format='%B %d,  %Y')`"
 output:
+  rmarkdown::pdf_document:
+    number_sections: yes
+    df_print: kable
+    toc: yes
   rmarkdown::html_vignette:
     number_sections: yes
     fig-width: 10
     fig-height: 8
     toc: yes
     df_print: kable
-  rmarkdown::pdf_document:
-    number_sections: yes
-    df_print: kable
-    toc: yes
 vignette: >
   %\VignetteIndexEntry{simplaceUtil} 
   %\VignetteEncoding{UTF-8} 
